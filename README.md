@@ -1,5 +1,7 @@
 # zipslip.py
 
+*[Русская версия](README.ru.md)*
+
 A small CLI for building ZIP archives whose **entry names (arcnames)**
 can be set independently of the real on-disk filename of the file being
 added.
