@@ -31,7 +31,7 @@ and confirm it rejects/normalizes unsafe entries correctly (e.g. by
 checking `os.path.realpath()` of each resolved destination against the
 intended output directory before writing).
 
-**This tool only builds ZIP files using the standard library. It does
+**This tool builds ZIP files using the standard library. It does
 not extract archives and does not exploit anything by itself** — it is
 meant to produce test input for your own extraction/sanitization code.
 

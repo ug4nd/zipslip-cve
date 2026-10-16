@@ -1,43 +1,4 @@
 #!/usr/bin/env python3
-"""
-zipslip.py — educational CLI for building ZIP archives with arbitrary
-entry (arcname) values, separate from the on-disk filename of the file
-being added.
-
-This is a thin wrapper around the Python standard library's
-`zipfile.ZipFile.write(filename, arcname=...)`, which already supports
-setting an entry name independent of the source file's real name. This
-tool just exposes that documented behavior through a convenient CLI.
-
-Why this exists
-----------------
-"Zip Slip" is a well-known vulnerability class where server-side code
-extracts a ZIP archive and writes each entry to disk using the entry's
-name as-is (e.g. `open(os.path.join(dest, entry.filename), "wb")`)
-without validating that the resolved path stays inside the intended
-output directory. An attacker-controlled entry name such as
-`../../../etc/passwd` or an absolute path can then cause the extractor
-to write outside the destination directory.
-
-This script helps you *build* ZIP archives with entry names you choose
-(including path-traversal-style names) so you can exercise and test
-your own extraction code's handling of that case — e.g. for the
-"Zip Slip" lab exercise on a CTF/training platform. It performs no
-extraction and does not exploit anything by itself; it only writes a
-ZIP file to disk using the standard library.
-
-Usage
------
-    python zipslip.py -o out.zip add payload.txt --as "../../tmp/evil.txt"
-    python zipslip.py -o out.zip add-text "hello" --as "notes/readme.txt"
-    python zipslip.py -o out.zip --list \
-        add a.txt --as "a.txt" \
-        add-text "data" --as "../outside.txt"
-
-Entries are processed in the order given on the command line. Multiple
-`add` / `add-text` entries may be combined in a single invocation.
-"""
-
 from __future__ import annotations
 
 import argparse
